@@ -1,8 +1,18 @@
-{
-  "3733153629": "permanent",
-  "1222621636": "permanent",
-  "5574020540": "permanent",
-  "11111111": { "plan": "day",   "start": "2026-10-06" },
-  "22222222": { "plan": "week",  "start": "2026-10-06" },
-  "33333333": { "plan": "month", "start": "2026-10-06" }
-}
+-- Kullanicilara verecegin loader: ana script'i GitHub'dan indirip calistirir
+local SCRIPT_URL = "https://raw.githubusercontent.com/koltur34-creator/WhiteList/refs/heads/main/ProFortnitePlayers.lua"
+
+local ok, kod = pcall(function()
+	return game:HttpGet(SCRIPT_URL .. "?t=" .. os.time()) -- ?t= GitHub onbellegini atlatir
+end)
+if not ok or type(kod) ~= "string" or #kod == 0 then
+	warn("[Loader] Script indirilemedi:", kod)
+	return
+end
+
+local fn, hata = loadstring(kod)
+if not fn then
+	warn("[Loader] Script derlenemedi:", hata)
+	return
+end
+
+fn()
